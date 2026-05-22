@@ -46,12 +46,23 @@ export default function Pegawai({ pegawai, jabatan }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/admin/pegawai', {
-            onSuccess: () => {
-                reset();
-                closeModals()
-            }
-        })
+
+        if (itemEdit) {
+            put('/admin/pegawai/' + itemEdit.id, {
+                onSuccess: () => {
+                    reset();
+                    closeModals()
+                }
+            })
+        } else {
+            post('/admin/pegawai', {
+                onSuccess: () => {
+                    reset();
+                    closeModals()
+                }
+            })
+        }
+
     }
 
 
@@ -136,7 +147,8 @@ export default function Pegawai({ pegawai, jabatan }) {
                             <label className="form-control w-full">
                                 <span className="label-text mb-2 font-medium">Jabatan</span>
                                 <select name="jabatan" className='select select-bordered' id="" required onChange={(e) => setData('jabatan', e.target.value)}>
-                                    <option value="">-- PIlih Jabatan --</option>
+                                    {data.jabatan != '' ? <option value={data.jabatan}>{itemEdit.jb.jabatan}</option> : <option value="">-- PIlih Jabatan --</option>}
+
                                     {jabatan.map((item, index) => (
                                         <option key={index} value={item.id}>{item.jabatan}</option>
                                     ))}
@@ -148,7 +160,7 @@ export default function Pegawai({ pegawai, jabatan }) {
 
                             <label className="form-control w-full">
                                 <span className="label-text mb-2 font-medium">Alamat</span>
-                                <textarea name="alamat" className='textarea textarea-bordered w-full' id="" placeholder='Alamat pegawai' required onChange={(e) => setData('alamat', e.target.value)}>
+                                <textarea name="alamat" value={data.alamat} className='textarea textarea-bordered w-full' id="" placeholder='Alamat pegawai' required onChange={(e) => setData('alamat', e.target.value)}>
                                 </textarea>
                                 {/* {errors.nama && (
                                 <span className="mt-1 text-sm text-error">{errors.nama}</span>

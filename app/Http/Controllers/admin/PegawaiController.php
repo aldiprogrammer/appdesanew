@@ -34,7 +34,13 @@ class PegawaiController extends Controller
 
     function update(Request $request, $id)
     {
-        $pg = Pegawai::find($id);
+        $pg = Pegawai::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            $this->deleteFoto($pg->foto);
+            $pg->foto = $this->uploadFoto($request);
+        }
+
         $pg->nama = $request->nama;
         $pg->nik = $request->nik;
         $pg->nip = $request->nip;
