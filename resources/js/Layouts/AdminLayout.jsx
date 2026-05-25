@@ -111,6 +111,48 @@ export default function AdminLayout({ children }) {
                             </Link>
                         </li>
 
+                        <li>
+                            <Link href="/admin/berita" className="rounded-xl">
+                                <i className="fas fa-newspaper"></i>
+                                Berita
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/gallery" className="rounded-xl">
+                                <i className="fas fa-image"></i>
+                                Galeri
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/profil-desa" className="rounded-xl">
+                                <i className="fas fa-city"></i>
+                                Profil Desa
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/umkm" className="rounded-xl">
+                                <i className="fas fa-store"></i>
+                                UMKM
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/kontak-layanan" className="rounded-xl">
+                                <i className="fas fa-phone"></i>
+                                Kontak Layanan
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/pegawai" className="rounded-xl">
+                                <i className="fas fa-users"></i>
+                                Pegawai
+                            </Link>
+                        </li>
+
                     </ul>
                 </aside>
             </div>

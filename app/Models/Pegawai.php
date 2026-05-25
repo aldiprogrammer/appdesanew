@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
-
-
+    protected $fillable = [
+        'nama',
+        'nik',
+        'nip',
+        'id_jabatan',
+        'nohp',
+        'alamat',
+        'foto',
+    ];
 
     public function jb()
     {

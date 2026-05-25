@@ -1,9 +1,10 @@
 import AdminLayout from '@/Layouts/AdminLayout'
 import { useForm } from '@inertiajs/react'
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 
 export default function Pegawai({ pegawai, jabatan }) {
-    const { data, setData, post, put, delete: destroy, processing, reset } = useForm({
+    const { data, setData, post, put, delete: destroy, processing, reset, errors } = useForm({
         nama: '',
         nik: '',
         nip: '',
@@ -20,27 +21,55 @@ export default function Pegawai({ pegawai, jabatan }) {
     const closeModals = () => {
         setCreateModal(false);
         setEditModal(false);
+        setItemEdit(null);
     }
 
     const openEditModal = (item) => {
         setItemEdit(item);
         setEditModal(true)
         setData({
-            'nama': item.nama,
-            'nik': item.nik,
-            'nip': item.nip,
-            'jabatan': item.id_jabatan,
-            'nohp': item.nohp,
-            'alamat': item.alamat,
-            'foto': null,
+            nama: item.nama,
+            nik: item.nik,
+            nip: item.nip,
+            jabatan: item.id_jabatan,
+            nohp: item.nohp,
+            alamat: item.alamat,
+            foto: null,
         });
     }
 
 
 
 
+    const hapus = (item) => {
+        Swal.fire({
+            title: 'Hapus pegawai?',
+            text: `Data "${item.nama}" akan dihapus permanen.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus',
+            cancelButtonText: 'Batal',
+            reverseButtons: true,
+            buttonsStyling: false,
+            customClass: {
+                actions: 'flex gap-3',
+                confirmButton: 'btn btn-error text-white',
+                cancelButton: 'btn btn-neutral text-white',
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                destroy(`/admin/pegawai/${item.id}`, {
+                    onSuccess: () => {
+                        reset();
+                    }
+                });
+            }
+        });
+    };
+
     const openCreateModal = () => {
         reset();
+        setItemEdit(null);
         setCreateModal(true);
     };
 
@@ -86,15 +115,16 @@ export default function Pegawai({ pegawai, jabatan }) {
                                 <span className="label-text mb-2 font-medium">Nama</span>
                                 <input
                                     type="text"
-                                    name="jabatan"
+                                    name="nama"
                                     value={data.nama}
                                     onChange={(e) => setData('nama', e.target.value)}
                                     className="input input-bordered w-full"
-                                    placeholder="Nama kepala dusun"
+                                    placeholder="Nama pegawai"
+                                    required
                                 />
-                                {/* {errors.nama && (
-                                <span className="mt-1 text-sm text-error">{errors.nama}</span>
-                            )} */}
+                                {errors.nama && (
+                                    <span className="mt-1 text-sm text-error">{errors.nama}</span>
+                                )}
                             </label>
 
                             <label className="form-control w-full">
@@ -117,15 +147,16 @@ export default function Pegawai({ pegawai, jabatan }) {
                                 <span className="label-text mb-2 font-medium">NIP</span>
                                 <input
                                     type="text"
-                                    name="nik"
+                                    name="nip"
                                     value={data.nip}
                                     onChange={(e) => setData('nip', e.target.value)}
                                     className="input input-bordered w-full"
-                                    placeholder="Nip pegawai" required
+                                    placeholder="Nip pegawai"
+                                    required
                                 />
-                                {/* {errors.nama && (
-                                <span className="mt-1 text-sm text-error">{errors.nama}</span>
-                            )} */}
+                                {errors.nip && (
+                                    <span className="mt-1 text-sm text-error">{errors.nip}</span>
+                                )}
                             </label>
 
 
@@ -146,25 +177,35 @@ export default function Pegawai({ pegawai, jabatan }) {
 
                             <label className="form-control w-full">
                                 <span className="label-text mb-2 font-medium">Jabatan</span>
-                                <select name="jabatan" className='select select-bordered' id="" required onChange={(e) => setData('jabatan', e.target.value)}>
-                                    {data.jabatan != '' ? <option value={data.jabatan}>{itemEdit.jb.jabatan}</option> : <option value="">-- PIlih Jabatan --</option>}
-
+                                <select
+                                    name="jabatan"
+                                    className='select select-bordered'
+                                    value={data.jabatan}
+                                    required
+                                    onChange={(e) => setData('jabatan', e.target.value)}>
+                                    <option value="">-- Pilih Jabatan --</option>
                                     {jabatan.map((item, index) => (
                                         <option key={index} value={item.id}>{item.jabatan}</option>
                                     ))}
                                 </select>
-                                {/* {errors.nama && (
-                                <span className="mt-1 text-sm text-error">{errors.nama}</span>
-                            )} */}
+                                {errors.jabatan && (
+                                    <span className="mt-1 text-sm text-error">{errors.jabatan}</span>
+                                )}
                             </label>
 
                             <label className="form-control w-full">
                                 <span className="label-text mb-2 font-medium">Alamat</span>
-                                <textarea name="alamat" value={data.alamat} className='textarea textarea-bordered w-full' id="" placeholder='Alamat pegawai' required onChange={(e) => setData('alamat', e.target.value)}>
-                                </textarea>
-                                {/* {errors.nama && (
-                                <span className="mt-1 text-sm text-error">{errors.nama}</span>
-                            )} */}
+                                <textarea
+                                    name="alamat"
+                                    value={data.alamat}
+                                    className='textarea textarea-bordered w-full'
+                                    placeholder='Alamat pegawai'
+                                    required
+                                    onChange={(e) => setData('alamat', e.target.value)}
+                                />
+                                {errors.alamat && (
+                                    <span className="mt-1 text-sm text-error">{errors.alamat}</span>
+                                )}
                             </label>
 
                         </div>
@@ -210,13 +251,13 @@ export default function Pegawai({ pegawai, jabatan }) {
             <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Data Jabatan</h2>
+                        <h2 className="text-2xl font-bold text-gray-900">Data Pegawai</h2>
                         <p className="mt-1 text-sm text-gray-500">
-                            Kelola data jabatan.
+                            Kelola data pegawai dan unggah foto.
                         </p>
                     </div>
                     <button type="button" onClick={openCreateModal} className="btn btn-primary">
-                        Tambah Jabatan
+                        Tambah Pegawai
                     </button>
                 </div>
 
@@ -275,11 +316,11 @@ export default function Pegawai({ pegawai, jabatan }) {
 
             {
                 createModal &&
-                renderModal('Tambah Jabatan', 'Masukkan data jabatan.')
+                renderModal('Tambah Pegawai', 'Masukkan data pegawai.')
             }
 
 
-            {editModal && renderModal('Edit Jabatan', '')}
+            {editModal && renderModal('Edit Pegawai', '')}
         </AdminLayout >
     )
 }

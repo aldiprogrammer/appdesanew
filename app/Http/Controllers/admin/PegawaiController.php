@@ -20,6 +20,16 @@ class PegawaiController extends Controller
 
     function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required|string|max:50',
+            'nik' => 'required|string|max:18',
+            'nip' => 'required|string|max:30',
+            'jabatan' => 'required|exists:jabatans,id',
+            'nohp' => 'required|string|max:18',
+            'alamat' => 'required|string',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
         $pg = new Pegawai();
         $pg->nama = $request->nama;
         $pg->nik = $request->nik;
@@ -34,6 +44,16 @@ class PegawaiController extends Controller
 
     function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required|string|max:50',
+            'nik' => 'required|string|max:18',
+            'nip' => 'required|string|max:30',
+            'jabatan' => 'required|exists:jabatans,id',
+            'nohp' => 'required|string|max:18',
+            'alamat' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
         $pg = Pegawai::findOrFail($id);
 
         if ($request->hasFile('foto')) {
@@ -53,7 +73,8 @@ class PegawaiController extends Controller
 
     function delete($id)
     {
-        $pg = Pegawai::find($id);
+        $pg = Pegawai::findOrFail($id);
+        $this->deleteFoto($pg->foto);
         $pg->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
@@ -82,7 +103,7 @@ class PegawaiController extends Controller
 
         $path = public_path(ltrim($foto, '/'));
 
-        if (File::exis($path)) {
+        if (File::exists($path)) {
             File::delete($path);
         }
     }
