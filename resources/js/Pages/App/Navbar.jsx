@@ -7,17 +7,17 @@ export default function Navbar() {
 
     const slides = [
         {
-            image: "/images/desa1.jpg",
+            image: "https://tse1.mm.bing.net/th/id/OIP.T_pZvSA5KvLL6kBjZC_tVwHaFj?pid=Api&P=0&h=180",
             title: "Selamat Datang di Website Desa",
             desc: "Informasi desa, pelayanan masyarakat, dan potensi desa terbaru.",
         },
         {
-            image: "/images/desa2.jpg",
+            image: "https://tse4.mm.bing.net/th/id/OIP.Hu5QvfdV-n0a8KHJa9JlZQHaE8?pid=Api&P=0&h=180",
             title: "Pelayanan Desa Cepat & Mudah",
             desc: "Akses informasi dan layanan masyarakat secara online.",
         },
         {
-            image: "/images/desa3.jpg",
+            image: "https://tse4.mm.bing.net/th/id/OIP.CscU84UHsTxt-GG3GYXgbAHaEK?pid=Api&P=0&h=180",
             title: "Membangun Desa Bersama",
             desc: "Transparan, maju, dan bermanfaat untuk masyarakat.",
         },

@@ -133,6 +133,13 @@ export default function AdminLayout({ children }) {
                         </li>
 
                         <li>
+                            <Link href="/admin/peta-desa" className="rounded-xl">
+                                <i className="fas fa-map-location-dot"></i>
+                                Peta Desa
+                            </Link>
+                        </li>
+
+                        <li>
                             <Link href="/admin/umkm" className="rounded-xl">
                                 <i className="fas fa-store"></i>
                                 UMKM
@@ -150,6 +157,34 @@ export default function AdminLayout({ children }) {
                             <Link href="/admin/pegawai" className="rounded-xl">
                                 <i className="fas fa-users"></i>
                                 Pegawai
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/kategori-bantuan" className="rounded-xl">
+                                <i className="fas fa-tags"></i>
+                                Kategori Bantuan
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/penerima-bantuan" className="rounded-xl">
+                                <i className="fas fa-hand-holding-heart"></i>
+                                Penerima Bantuan
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/stanting" className="rounded-xl">
+                                <i className="fas fa-child"></i>
+                                Stanting
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/apbdes" className="rounded-xl">
+                                <i className="fas fa-file-invoice-dollar"></i>
+                                APBDes
                             </Link>
                         </li>
 

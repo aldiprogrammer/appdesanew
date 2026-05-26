@@ -4,6 +4,11 @@ import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 
 export default function Berita({ berita }) {
+    const truncate = (text, length = 140) => {
+        if (!text) return ''
+        const plain = String(text).replace(/<[^>]*>/g, '')
+        return plain.length > length ? `${plain.slice(0, length)}...` : plain
+    }
     const { data, setData, post, put, delete: destroy, processing, reset, errors } = useForm({
         judul: '',
         keterangan: '',
@@ -228,7 +233,9 @@ export default function Berita({ berita }) {
                                                 {item.status === 0 ? 'Aktif' : 'Tidak Aktif'}
                                             </span>
                                         </td>
-                                        <td>{item.keterangan}</td>
+                                        <td title={item.keterangan} className="max-w-[420px] truncate">
+                                            {truncate(item.keterangan, 140)}
+                                        </td>
                                         <td className="space-y-2">
                                             <button className="btn btn-warning btn-sm w-full" onClick={() => openEditModal(item)}>
                                                 Edit

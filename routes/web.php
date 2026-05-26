@@ -8,9 +8,15 @@ use App\Http\Controllers\admin\PegawaiController;
 use App\Http\Controllers\admin\BeritaController;
 use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\admin\ProfilDesaController;
+use App\Http\Controllers\admin\PetaDesaController;
 use App\Http\Controllers\admin\UmkmController;
 use App\Http\Controllers\admin\KontakLayananController;
+use App\Http\Controllers\admin\KategoriBantuanController;
+use App\Http\Controllers\admin\PenerimaBantuanController;
+use App\Http\Controllers\admin\StantingController;
+use App\Http\Controllers\admin\ApbdesController;
 use App\Http\Controllers\app\HomeController as AppHomeController;
+use App\Http\Controllers\app\PrfildesaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +74,8 @@ Route::post('/admin/profil-desa', [ProfilDesaController::class, 'store'])->name(
 Route::put('/admin/profil-desa/{id}', [ProfilDesaController::class, 'update'])->name('update.profil.desa');
 Route::delete('/admin/profil-desa/{id}', [ProfilDesaController::class, 'delete'])->name('delete.profil.desa');
 
+Route::get('/admin/peta-desa', [PetaDesaController::class, 'index'])->name('peta.desa');
+
 Route::get('/admin/pegawai', [PegawaiController::class, 'index'])->name('pegawai');
 Route::post('/admin/pegawai', [PegawaiController::class, 'store'])->name('store.pegawai');
 Route::put('/admin/pegawai/{id}', [PegawaiController::class, 'update'])->name('update.pegawai');
@@ -84,6 +92,49 @@ Route::put('/admin/kontak-layanan/{id}', [KontakLayananController::class, 'updat
 Route::delete('/admin/kontak-layanan/{id}', [KontakLayananController::class, 'delete'])->name('delete.kontak.layanan');
 
 Route::get('/desa', [AppHomeController::class, 'index'])->name('home');
+Route::get('/berita', function () {
+    $berita = \App\Models\Berita::where('status', 0)->latest()->get();
+    return Inertia::render('App/BeritaList', compact('berita'));
+})->name('berita.list');
+Route::get('/berita/{id}', function ($id) {
+    $berita = \App\Models\Berita::where('status', 0)->findOrFail($id);
+    return Inertia::render('App/BeritaDetail', compact('berita'));
+})->name('berita.detail');
+Route::get('/struktur', function () {
+    return Inertia::render('App/Struktur');
+})->name('struktur');
+
+
+Route::get('/admin/kategori-bantuan', [KategoriBantuanController::class, 'index'])->name('kategori.bantuan');
+Route::post('/admin/kategori-bantuan', [KategoriBantuanController::class, 'store'])->name('store.kategori.bantuan');
+Route::put('/admin/kategori-bantuan/{id}', [KategoriBantuanController::class, 'update'])->name('update.kategori.bantuan');
+Route::delete('/admin/kategori-bantuan/{id}', [KategoriBantuanController::class, 'delete'])->name('delete.kategori.bantuan');
+
+Route::get('/admin/penerima-bantuan', [PenerimaBantuanController::class, 'index'])->name('penerima.bantuan');
+Route::post('/admin/penerima-bantuan', [PenerimaBantuanController::class, 'store'])->name('store.penerima.bantuan');
+Route::put('/admin/penerima-bantuan/{id}', [PenerimaBantuanController::class, 'update'])->name('update.penerima.bantuan');
+Route::delete('/admin/penerima-bantuan/{id}', [PenerimaBantuanController::class, 'delete'])->name('delete.penerima.bantuan');
+
+Route::get('/admin/stanting', [StantingController::class, 'index'])->name('stanting');
+Route::post('/admin/stanting', [StantingController::class, 'store'])->name('store.stanting');
+Route::put('/admin/stanting/{id}', [StantingController::class, 'update'])->name('update.stanting');
+Route::delete('/admin/stanting/{id}', [StantingController::class, 'delete'])->name('delete.stanting');
+
+Route::get('/admin/apbdes', [ApbdesController::class, 'index'])->name('apbdes');
+Route::post('/admin/apbdes', [ApbdesController::class, 'store'])->name('store.apbdes');
+Route::get('/admin/apbdes/{id}', [ApbdesController::class, 'show'])->name('show.apbdes');
+Route::put('/admin/apbdes/{id}', [ApbdesController::class, 'update'])->name('update.apbdes');
+Route::delete('/admin/apbdes/{id}', [ApbdesController::class, 'delete'])->name('delete.apbdes');
+
+Route::post('/admin/apbdes/{apbdesId}/pendapatan', [ApbdesController::class, 'storePendapatan'])->name('store.pendapatan');
+Route::put('/admin/apbdes/{apbdesId}/pendapatan/{pendapatanId}', [ApbdesController::class, 'updatePendapatan'])->name('update.pendapatan');
+Route::delete('/admin/apbdes/{apbdesId}/pendapatan/{pendapatanId}', [ApbdesController::class, 'deletePendapatan'])->name('delete.pendapatan');
+
+Route::post('/admin/apbdes/{apbdesId}/belanja', [ApbdesController::class, 'storeBelanja'])->name('store.belanja');
+Route::put('/admin/apbdes/{apbdesId}/belanja/{belanjaId}', [ApbdesController::class, 'updateBelanja'])->name('update.belanja');
+Route::delete('/admin/apbdes/{apbdesId}/belanja/{belanjaId}', [ApbdesController::class, 'deleteBelanja'])->name('delete.belanja');
+
+Route::get('/profildesa', [PrfildesaController::class, 'index'])->name('profildesa');
 
 // Route::get('/desa', function () {
 //     return Inertia::render('App/Village');
