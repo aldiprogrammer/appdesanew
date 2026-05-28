@@ -58,7 +58,7 @@ export default function Navbar() {
                         className={`text-2xl font-bold ${scrolled ? "text-green-700" : "text-white"
                             }`}
                     >
-                        Desa Anda
+                        Desa Tanjung Putus
                     </h1>
 
                     <div className="hidden gap-8 md:flex">

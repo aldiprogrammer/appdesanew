@@ -17,6 +17,7 @@ use App\Http\Controllers\admin\StantingController;
 use App\Http\Controllers\admin\ApbdesController;
 use App\Http\Controllers\app\HomeController as AppHomeController;
 use App\Http\Controllers\app\PrfildesaController;
+use App\Http\Controllers\app\InfografisController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -135,6 +136,7 @@ Route::put('/admin/apbdes/{apbdesId}/belanja/{belanjaId}', [ApbdesController::cl
 Route::delete('/admin/apbdes/{apbdesId}/belanja/{belanjaId}', [ApbdesController::class, 'deleteBelanja'])->name('delete.belanja');
 
 Route::get('/profildesa', [PrfildesaController::class, 'index'])->name('profildesa');
+Route::get('/infografis', [InfografisController::class, 'index'])->name('infografis');
 
 // Route::get('/desa', function () {
 //     return Inertia::render('App/Village');
