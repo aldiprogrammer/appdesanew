@@ -280,21 +280,30 @@ export default function Infografis({ total, lakiLaki, perempuan, kepalaKeluarga,
                             </h2>
                             <p className="mt-1 text-sm text-gray-500">Data anak stanting berdasarkan dusun</p>
                         </div>
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 grid-cols-2">
-                            <div className="rounded-3xl border border-base-200 bg-orange-400 p-6 shadow-sm text-center">
-                                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl text-orange-500">
+                        {totalStanting > 0 ? (
+                            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 grid-cols-2">
+                                <div className="rounded-3xl border border-base-200 bg-orange-400 p-6 shadow-sm text-center">
+                                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl text-orange-500">
+                                        <i className="fas fa-child"></i>
+                                    </div>
+                                    <p className="text-3xl font-extrabold text-white">{totalStanting.toLocaleString()}</p>
+                                    <p className="mt-1 text-sm font-bold uppercase tracking-wider text-black">Total Stanting</p>
+                                </div>
+                                {stantingPerDusun.map((item) => (
+                                    <div key={item.nama_dusun} className="rounded-3xl border border-base-200 bg-white p-6 shadow-sm text-center">
+                                        <p className="text-3xl font-extrabold text-gray-900">{item.total.toLocaleString()}</p>
+                                        <p className="mt-1 text-sm font-medium text-gray-500">{item.nama_dusun}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="rounded-3xl border border-dashed border-gray-300 bg-white p-12 shadow-sm text-center">
+                                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-3xl text-gray-400">
                                     <i className="fas fa-child"></i>
                                 </div>
-                                <p className="text-3xl font-extrabold text-white">{totalStanting.toLocaleString()}</p>
-                                <p className="mt-1 text-sm font-bold uppercase tracking-wider text-black">Total Stanting</p>
+                                <p className="text-lg font-semibold text-gray-500">Data Infografis Stanting tidak ada</p>
                             </div>
-                            {stantingPerDusun.map((item) => (
-                                <div key={item.nama_dusun} className="rounded-3xl border border-base-200 bg-white p-6 shadow-sm text-center">
-                                    <p className="text-3xl font-extrabold text-gray-900">{item.total.toLocaleString()}</p>
-                                    <p className="mt-1 text-sm font-medium text-gray-500">{item.nama_dusun}</p>
-                                </div>
-                            ))}
-                        </div>
+                        )}
                     </div>
 
                     {/* Bansos */}
@@ -306,21 +315,30 @@ export default function Infografis({ total, lakiLaki, perempuan, kepalaKeluarga,
                             </h2>
                             <p className="mt-1 text-sm text-gray-500">Data penerima bantuan sosial berdasarkan kategori</p>
                         </div>
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 grid-cols-2">
-                            <div className="rounded-3xl border border-base-200 bg-red-400 p-6 shadow-sm text-center">
-                                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl text-red-500">
+                        {totalBansos > 0 ? (
+                            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 grid-cols-2">
+                                <div className="rounded-3xl border border-base-200 bg-red-400 p-6 shadow-sm text-center">
+                                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl text-red-500">
+                                        <i className="fas fa-hand-holding-heart"></i>
+                                    </div>
+                                    <p className="text-3xl font-extrabold text-white">{totalBansos.toLocaleString()}</p>
+                                    <p className="mt-1 text-sm font-bold uppercase tracking-wider text-black">Total Penerima</p>
+                                </div>
+                                {bansosPerKategori.map((item) => (
+                                    <div key={item.nama_bantuan} className="rounded-3xl border border-base-200 bg-white p-6 shadow-sm text-center">
+                                        <p className="text-3xl font-extrabold text-gray-900">{item.total.toLocaleString()}</p>
+                                        <p className="mt-1 text-sm font-medium text-gray-500">{item.nama_bantuan}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="rounded-3xl border border-dashed border-gray-300 bg-white p-12 shadow-sm text-center">
+                                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-3xl text-gray-400">
                                     <i className="fas fa-hand-holding-heart"></i>
                                 </div>
-                                <p className="text-3xl font-extrabold text-white">{totalBansos.toLocaleString()}</p>
-                                <p className="mt-1 text-sm font-bold uppercase tracking-wider text-black">Total Penerima</p>
+                                <p className="text-lg font-semibold text-gray-500">Data Infografis Bansos tidak ada</p>
                             </div>
-                            {bansosPerKategori.map((item) => (
-                                <div key={item.nama_bantuan} className="rounded-3xl border border-base-200 bg-white p-6 shadow-sm text-center">
-                                    <p className="text-3xl font-extrabold text-gray-900">{item.total.toLocaleString()}</p>
-                                    <p className="mt-1 text-sm font-medium text-gray-500">{item.nama_bantuan}</p>
-                                </div>
-                            ))}
-                        </div>
+                        )}
                     </div>
 
                     <div className="mt-12 text-center">
