@@ -1,37 +1,90 @@
-import { Link } from '@inertiajs/react'
-import React from 'react'
+import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function ProfilDesa({ profil, kades, dusun = [] }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <>
-            <nav
-                className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 bg-green-600 py-4 text-white`}
-            >
-                <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-                    <h1
-                        className={`text-2xl font-bold`}
-                    >
-                        Desa Anda
-                    </h1>
+        <div className="min-h-screen bg-[#f5f7fa]">
+            {/* Navbar */}
+            <nav className="fixed top-0 left-0 z-50 w-full bg-white/80 shadow-sm backdrop-blur-md">
+                <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm text-white shadow-sm">
+                            <i className="fas fa-info-circle"></i>
+                        </div>
+                        <span className="text-lg font-bold text-gray-800">Profil Desa <span className="font-normal text-gray-500">Tanjung Putus</span></span>
+                    </div>
+                    <div className="hidden items-center gap-1 md:flex">
+                        <Link href="/desa" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-home mr-1.5"></i>Beranda</Link>
+                        <Link href="/profildesa" className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-emerald-600"><i className="fas fa-info-circle mr-1.5"></i>Profil</Link>
+                        <Link href="/infografis" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-chart-pie mr-1.5"></i>Infografis</Link>
+                        <Link href="/apbdes" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-landmark mr-1.5"></i>APBDes</Link>
+                        <Link href="/pengaduan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-bullhorn mr-1.5"></i>Pengaduan</Link>
+                        <Link href="/kontak-layanan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-phone mr-1.5"></i>Kontak</Link>
+                        <Link href="/struktur" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-sitemap mr-1.5"></i>Struktur</Link>
+                        <Link href="/surat/login" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-file-lines mr-1.5"></i>Surat</Link>
+                    </div>
+                    <button onClick={() => setMenuOpen(!menuOpen)} className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 md:hidden">
+                        <i className={`fas ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-lg`}></i>
+                    </button>
+                </div>
+                {menuOpen && (
+                    <div className="border-t border-gray-100 bg-white px-6 py-4 md:hidden">
+                        <div className="flex flex-col gap-2">
+                            <Link href="/desa" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-home mr-2"></i>Beranda</Link>
+                            <Link href="/profildesa" className="rounded-lg bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-600"><i className="fas fa-info-circle mr-2"></i>Profil</Link>
+                            <Link href="/infografis" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-chart-pie mr-2"></i>Infografis</Link>
+                            <Link href="/apbdes" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-landmark mr-2"></i>APBDes</Link>
+                            <Link href="/pengaduan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-bullhorn mr-2"></i>Pengaduan</Link>
+                            <Link href="/kontak-layanan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-phone mr-2"></i>Kontak</Link>
+                            <Link href="/struktur" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-sitemap mr-2"></i>Struktur</Link>
+                            <Link href="/surat/login" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-file-lines mr-2"></i>Surat</Link>
+                        </div>
+                    </div>
+                )}
+            </nav>
 
-                    <div className="hidden gap-8 md:flex">
-                        {["Beranda", "Profil", "Berita", "Galeri", "Kontak"].map(
-                            (item) => (
-                                <Link
-                                    key={item}
-
-                                    className={`font-medium transition`}
-                                >
-                                    {item}
-                                </Link>
-                            )
+            {/* Jumbotron */}
+            <div className="relative mt-14 overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500">
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-white"></div>
+                    <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-white"></div>
+                </div>
+                <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
+                    <div className="flex flex-col items-center text-center md:flex-row md:text-left md:justify-between">
+                        <div>
+                            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
+                                <i className="fas fa-info-circle"></i>
+                                Profil Desa
+                            </div>
+                            <h1 className="text-3xl font-extrabold text-white md:text-5xl">
+                                {profil?.nama_desa || 'Profil Desa'}
+                            </h1>
+                            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">
+                                Informasi lengkap desa, visi misi, dan data wilayah.
+                            </p>
+                        </div>
+                        {profil && (
+                            <div className="mt-6 flex shrink-0 items-center gap-4 rounded-2xl bg-white/15 p-5 backdrop-blur-sm md:mt-0">
+                                <div className="text-center">
+                                    <p className="text-xs font-medium text-white/70">Kecamatan</p>
+                                    <p className="text-base font-extrabold text-white">{profil.nama_kecamatan}</p>
+                                </div>
+                                <div className="h-12 w-px bg-white/20"></div>
+                                <div className="text-center">
+                                    <p className="text-xs font-medium text-white/70">Kabupaten</p>
+                                    <p className="text-base font-extrabold text-white">{profil.nama_kabupaten}</p>
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>
-            </nav>
+            </div>
 
+            {/* Sambutan */}
             <section id="sambutan" className="bg-white py-16 font-['Poppins',sans-serif] text-gray-950 md:py-20">
-                <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-20 mt-10">
+                <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-20">
                     <div className="relative mx-auto w-full max-w-sm md:mx-0">
                         <div className="absolute -left-4 -top-4 h-full w-full rounded bg-[#5ee142]" />
                         <div className="relative overflow-hidden rounded bg-gray-100 shadow-[0_12px_30px_rgba(0,0,0,0.16)]">
@@ -54,7 +107,7 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                         </p>
 
                         <div className="mt-8 border-l-4 border-[#5ee142] pl-5">
-                            <p className="text-lg font-extrabold text-gray-900">{profil.kepala_desa}</p>
+                            <p className="text-lg font-extrabold text-gray-900">{profil?.kepala_desa || 'Belum ada data'}</p>
                             <p className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-gray-500">
                                 Kepala Desa
                             </p>
@@ -63,6 +116,7 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                 </div>
             </section>
 
+            {/* Visi & Misi */}
             <section id="visi-misi" className="bg-[#f7f7f7] py-16 font-['Poppins',sans-serif] text-gray-950 md:py-20">
                 <div className="mx-auto max-w-7xl px-6 lg:px-20">
                     <div className="mb-10 text-center">
@@ -78,7 +132,8 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                     </div>
 
                     <div className="grid gap-6 md:grid-cols-2">
-                        <article className="rounded-[32px] border border-base-200 bg-white p-8 shadow-[0_22px_45px_rgba(15,23,42,0.08)] transition hover:-translate-y-1">
+                        <article className="group relative overflow-hidden rounded-2xl border border-base-200 bg-white p-8 shadow-[0_22px_45px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                            <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500"></div>
                             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-400 text-white shadow-lg">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-8 w-8">
                                     <path d="M12 3l7 6-7 8-7-8 7-6Z" strokeLinecap="round" strokeLinejoin="round" />
@@ -90,7 +145,8 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                             </p>
                         </article>
 
-                        <article className="rounded-[32px] border border-base-200 bg-white p-8 shadow-[0_22px_45px_rgba(15,23,42,0.08)] transition hover:-translate-y-1">
+                        <article className="group relative overflow-hidden rounded-2xl border border-base-200 bg-white p-8 shadow-[0_22px_45px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                            <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500"></div>
                             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-green-700 to-emerald-500 text-white shadow-lg">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-8 w-8">
                                     <path d="M5 12h14M5 6h14M5 18h14" strokeLinecap="round" strokeLinejoin="round" />
@@ -111,6 +167,7 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                 </div>
             </section>
 
+            {/* Dusun */}
             <section id="dusun" className="relative overflow-hidden bg-gradient-to-b from-white to-[#fafdfb] py-16 font-['Poppins',sans-serif] text-gray-950 md:py-20">
                 <div className="pointer-events-none absolute inset-0">
                     <div className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-emerald-100/40 blur-3xl" />
@@ -191,14 +248,11 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                                 </div>
                             </div>
                         )) : (
-                            <div className="col-span-full rounded-[28px] border border-dashed border-gray-300 bg-white/60 p-14 text-center shadow-sm backdrop-blur-sm">
-                                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-7 w-7 text-gray-400">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" strokeLinecap="round" strokeLinejoin="round" />
-                                        <circle cx="12" cy="9" r="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
+                            <div className="col-span-full rounded-3xl border border-dashed border-gray-300 bg-white p-16 shadow-sm text-center">
+                                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gray-100 text-4xl text-gray-400">
+                                    <i className="fas fa-map-location-dot"></i>
                                 </div>
-                                <p className="text-base font-semibold text-gray-900">Belum Ada Data Dusun</p>
+                                <p className="text-xl font-semibold text-gray-500">Belum Ada Data Dusun</p>
                                 <p className="mt-1.5 text-sm text-gray-500">Data dusun akan tampil di sini setelah ditambahkan oleh admin.</p>
                             </div>
                         )}
@@ -206,6 +260,26 @@ export default function ProfilDesa({ profil, kades, dusun = [] }) {
                 </div>
             </section>
 
-        </>
+            {/* Navigasi */}
+            <div className="mx-auto max-w-6xl px-6 py-10">
+                <div className="mt-12 flex flex-wrap justify-center gap-4">
+                    <Link href="/infografis" className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-emerald-400 hover:text-emerald-600">
+                        <i className="fas fa-chart-pie"></i>
+                        Lihat Infografis
+                    </Link>
+                    <Link href="/desa" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:from-emerald-600 hover:to-emerald-700">
+                        <i className="fas fa-arrow-left"></i>
+                        Kembali ke Beranda
+                    </Link>
+                </div>
+            </div>
+
+            {/* Footer */}
+            <footer className="border-t border-gray-200 bg-white py-6">
+                <div className="mx-auto max-w-6xl px-6 text-center text-sm text-gray-400">
+                    &copy; {new Date().getFullYear()} {profil?.nama_desa || 'Desa'}. Profil desa untuk masyarakat.
+                </div>
+            </footer>
+        </div>
     )
 }

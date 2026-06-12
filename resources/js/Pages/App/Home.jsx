@@ -61,7 +61,7 @@ const exploreItems = [
     },
 ];
 
-export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [] }) {
+export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [], pegawai = [] }) {
     const mapRef = useRef(null);
     const mapContainerRef = useRef(null);
 
@@ -73,25 +73,6 @@ export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [] }
         latitude: 3.82088,
         longitude: 98.21595,
     };
-
-    const orgItems = [
-        {
-            name: 'Rina Jayanti',
-            role: 'Kaur Keuangan',
-        },
-        {
-            name: 'Marliana',
-            role: 'Kepala Seksi Pelayanan dan Kesejahteraan',
-        },
-        {
-            name: 'Alfiah Ramadhani Ampat',
-            role: 'Kaur Umum dan Perencanaan',
-        },
-        {
-            name: 'Safitriyani',
-            role: 'Kasi Pemerintahan',
-        },
-    ];
 
     useEffect(() => {
         if (!mapContainerRef.current || mapRef.current) {
@@ -231,20 +212,22 @@ export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [] }
                     </div>
 
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 grid-cols-2">
-                        {orgItems.map((item) => (
-                            <div key={item.name} className="overflow-hidden rounded-3xl border border-base-200 bg-[#f7f7f7] p-6 text-center shadow-sm">
+                        {pegawai.length > 0 ? pegawai.slice(0, 4).map((item) => (
+                            <div key={item.id} className="overflow-hidden rounded-3xl border border-base-200 bg-[#f7f7f7] p-6 text-center shadow-sm">
                                 <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-[#e5f7eb] text-2xl font-bold text-green-700">
-                                    {item.name
+                                    {item.nama
                                         .split(' ')
                                         .map((part) => part[0])
                                         .join('')}
                                 </div>
                                 <div>
-                                    <p className="text-lg font-semibold text-gray-900">{item.name}</p>
-                                    <p className="mt-2 text-sm text-gray-600">{item.role}</p>
+                                    <p className="text-lg font-semibold text-gray-900">{item.nama}</p>
+                                    <p className="mt-2 text-sm text-gray-600">{item.jb?.jabatan || '-'}</p>
                                 </div>
                             </div>
-                        ))}
+                        )) : (
+                            <p className="col-span-full text-center text-gray-600">Belum ada data pegawai.</p>
+                        )}
                     </div>
 
                     <div className="mt-10 text-center">

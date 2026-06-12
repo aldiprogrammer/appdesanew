@@ -53,6 +53,8 @@ class UmkmController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
         $request->validate([
             'nama_usaha' => 'required|string|max:255',
             'alamat' => 'nullable|string',

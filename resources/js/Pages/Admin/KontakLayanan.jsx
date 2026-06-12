@@ -168,9 +168,9 @@ export default function KontakLayanan({ kontak }) {
                                         </td>
                                         <td>{item.nama_layanan}</td>
                                         <td>{item.nomor}</td>
-                                        <td className="space-y-2">
-                                            <button className="btn btn-warning btn-sm w-full" onClick={() => openEditModal(item)}>Edit</button>
-                                            <button className="btn btn-error btn-sm w-full" onClick={() => hapus(item)}>Hapus</button>
+                                        <td className="flex gap-2">
+                                            <button className="btn btn-warning btn-sm" onClick={() => openEditModal(item)}>Edit</button>
+                                            <button className="btn btn-error btn-sm" onClick={() => hapus(item)}>Hapus</button>
                                         </td>
                                     </tr>
                                 ))}

@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/react";
 export default function Navbar() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const slides = [
         {
@@ -61,23 +62,34 @@ export default function Navbar() {
                         Desa Tanjung Putus
                     </h1>
 
-                    <div className="hidden gap-8 md:flex">
-                        {["Beranda", "Profil", "Berita", "Galeri", "Kontak"].map(
-                            (item) => (
-                                <Link
-                                    key={item}
-                                    href={`#${item.toLowerCase()}`}
-                                    className={`font-medium transition ${scrolled
-                                        ? "text-gray-700 hover:text-green-700"
-                                        : "text-white hover:text-green-300"
-                                        }`}
-                                >
-                                    {item}
-                                </Link>
-                            )
-                        )}
+                    <div className="hidden items-center gap-1 md:flex">
+                        <Link href="/desa" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-home mr-1.5"></i>Beranda</Link>
+                        <Link href="#profil" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-info-circle mr-1.5"></i>Profil</Link>
+                        <Link href="/infografis" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-chart-pie mr-1.5"></i>Infografis</Link>
+                        <Link href="/apbdes" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-landmark mr-1.5"></i>APBDes</Link>
+                        <Link href="/pengaduan" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-bullhorn mr-1.5"></i>Pengaduan</Link>
+                        <Link href="/kontak-layanan" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-phone mr-1.5"></i>Kontak</Link>
+                        <Link href="#struktur" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-sitemap mr-1.5"></i>Struktur</Link>
+                        <Link href="/surat/login" className={`rounded-lg px-3 py-2 text-sm font-medium transition ${scrolled ? "text-gray-700 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-file-lines mr-1.5"></i>Surat</Link>
                     </div>
+                    <button onClick={() => setMenuOpen(!menuOpen)} className={`flex h-9 w-9 items-center justify-center rounded-lg transition md:hidden ${scrolled ? "text-gray-600 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}>
+                        <i className={`fas ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-lg`}></i>
+                    </button>
                 </div>
+                {menuOpen && (
+                    <div className={`border-t px-6 py-4 md:hidden ${scrolled ? "border-gray-100 bg-white" : "border-white/10 bg-black/80 backdrop-blur-md"}`}>
+                        <div className="flex flex-col gap-2">
+                            <Link href="/desa" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-home mr-2"></i>Beranda</Link>
+                            <Link href="#profil" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-info-circle mr-2"></i>Profil</Link>
+                            <Link href="/infografis" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-chart-pie mr-2"></i>Infografis</Link>
+                            <Link href="/apbdes" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-landmark mr-2"></i>APBDes</Link>
+                            <Link href="/pengaduan" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-bullhorn mr-2"></i>Pengaduan</Link>
+                            <Link href="/kontak-layanan" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-phone mr-2"></i>Kontak</Link>
+                            <Link href="#struktur" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-sitemap mr-2"></i>Struktur</Link>
+                            <Link href="/surat/login" className={`rounded-lg px-4 py-2 text-sm font-medium transition ${scrolled ? "text-gray-600 hover:bg-emerald-50 hover:text-emerald-600" : "text-white/90 hover:bg-white/10 hover:text-white"}`}><i className="fas fa-file-lines mr-2"></i>Surat</Link>
+                        </div>
+                    </div>
+                )}
             </nav>
 
             {/* Hero Slider */}

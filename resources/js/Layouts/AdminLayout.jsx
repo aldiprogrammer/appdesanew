@@ -2,16 +2,16 @@ import { Link, router, usePage } from '@inertiajs/react'
 import React from 'react'
 
 export default function AdminLayout({ children }) {
-    // const { auth } = usePage().props
-    // const role = auth?.user?.role
+    const { admin_auth } = usePage().props
+    const admin = admin_auth?.admin
 
-    // const getInitial = (name) => {
-    //     return name?.charAt(0).toUpperCase() || 'U'
-    // }
+    const getInitial = (name) => {
+        return name?.charAt(0).toUpperCase() || 'A'
+    }
 
-    // const handleLogout = () => {
-    //     router.post(route('logout'))
-    // }
+    const handleLogout = () => {
+        router.post(route('admin.logout'))
+    }
 
     return (
         <div className="drawer lg:drawer-open">
@@ -49,10 +49,10 @@ export default function AdminLayout({ children }) {
                             <div tabindex="0" role="button" className="btn btn-ghost flex items-center gap-2">
                                 <div className="avatar placeholder">
                                     <div className="bg-primaryGreen text-white rounded-full w-10">
-                                        <span>Admin</span>
+                                        <span>{getInitial(admin?.nama)}</span>
                                     </div>
                                 </div>
-                                <span className="hidden md:block font-medium">Admin</span>
+                                <span className="hidden md:block font-medium">{admin?.nama || 'Admin'}</span>
                             </div>
 
                             <ul tabindex="0"
@@ -61,7 +61,7 @@ export default function AdminLayout({ children }) {
                                     <Link>Profile</Link>
                                 </li>
                                 <li>
-                                    <button className="text-error w-full text-left">
+                                    <button onClick={handleLogout} className="text-error w-full text-left">
                                         Logout
                                     </button>
                                 </li>
@@ -87,6 +87,20 @@ export default function AdminLayout({ children }) {
                             <Link href="/admin/dashboard" className="rounded-xl">
                                 <i className="fas fa-home"></i>
                                 Dashboard
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/penduduk" className="rounded-xl">
+                                <i className="fas fa-users"></i>
+                                Data Penduduk
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/surat" className="rounded-xl">
+                                <i className="fas fa-file-lines"></i>
+                                Layanan Surat
                             </Link>
                         </li>
 
@@ -185,6 +199,13 @@ export default function AdminLayout({ children }) {
                             <Link href="/admin/apbdes" className="rounded-xl">
                                 <i className="fas fa-file-invoice-dollar"></i>
                                 APBDes
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href="/admin/pengaduan" className="rounded-xl">
+                                <i className="fas fa-bullhorn"></i>
+                                Pengaduan
                             </Link>
                         </li>
 

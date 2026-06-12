@@ -29,8 +29,8 @@ class ProfilDesaController extends Controller
             'telepon' => 'nullable|string|max:50',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'foto_kantor' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'logo' => 'nullable',
+            'foto_kantor' => 'nullable',
             'kepala_desa' => 'nullable|string|max:255',
             'sambutan' => 'nullable|string',
             'visi' => 'nullable|string',
@@ -65,6 +65,14 @@ class ProfilDesaController extends Controller
 
     public function update(Request $request, $id)
     {
+        // FormData converts JS null to string "null" — remove them before validation
+        if ($request->input('logo') === 'null') {
+            $request->merge(['logo' => null]);
+        }
+        if ($request->input('foto_kantor') === 'null') {
+            $request->merge(['foto_kantor' => null]);
+        }
+
         $request->validate([
             'nama_desa' => 'required|string|max:255',
             'kode_desa' => 'nullable|string|max:255',
@@ -76,8 +84,8 @@ class ProfilDesaController extends Controller
             'telepon' => 'nullable|string|max:50',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'foto_kantor' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'logo' => 'nullable',
+            'foto_kantor' => 'nullable',
             'kepala_desa' => 'nullable|string|max:255',
             'sambutan' => 'nullable|string',
             'visi' => 'nullable|string',

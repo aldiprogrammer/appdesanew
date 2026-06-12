@@ -23,12 +23,14 @@ class HomeController extends Controller
 
         $berita = Berita::where('status', 0)->latest()->take(4)->get();
         $umkm = Umkm::latest()->take(4)->get();
+        $pegawai = Pegawai::with('jb')->latest()->get();
         return Inertia::render('App/Home', [
             'title' => 'Home',
             'profil' => $profil,
             'kepalaDesaPhoto' => $kepalaDesa?->foto,
             'berita' => $berita,
             'umkm' => $umkm,
+            'pegawai' => $pegawai,
         ]);
     }
 }
