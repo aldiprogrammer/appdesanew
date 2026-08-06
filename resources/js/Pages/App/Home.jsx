@@ -308,7 +308,7 @@ export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [], 
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-semibold text-gray-900">{b.nama_usaha.slice(0, 7)}..</h3>
-                                        <p className="mt-2 text-sm text-gray-600"><i className="fas fa-map-marker-alt"></i> {(b.alamat || '').length > 120 ? `${(b.alamat || '').slice(0, 20)}...` : (b.alamat || '')}</p>
+                                        <p className="mt-2 text-sm text-gray-600"><i className="fas fa-map-marker-alt"></i> {b.alamat}</p>
                                         <button className="mt-4  rounded-full bg-[#5ee142] px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-600 w-full text-center">
                                             {b.nohp}
                                         </button>
@@ -316,13 +316,13 @@ export default function Home({ profil, kepalaDesaPhoto, berita = [], umkm = [], 
                                 </Link>
                             )
                         }) : (
-                            <p className="text-center text-gray-600">Belum ada berita.</p>
+                            <p className="text-center text-gray-600">Belum ada UMKM yang terdaftar.</p>
                         )}
                     </div>
 
                     <div className="mt-10 text-center">
                         <Link
-                            href="/berita"
+                            href="/umkm"
                             className="inline-flex items-center rounded-full bg-[#5ee142] px-8 py-3 text-sm font-semibold text-white transition hover:bg-green-600"
                         >
                             Lihat Selengkapnya

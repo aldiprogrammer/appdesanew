@@ -2,7 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import React from 'react'
 
 export default function AdminLayout({ children }) {
-    const { admin_auth } = usePage().props
+    const { admin_auth, admin_menus } = usePage().props
     const admin = admin_auth?.admin
 
     const getInitial = (name) => {
@@ -12,6 +12,16 @@ export default function AdminLayout({ children }) {
     const handleLogout = () => {
         router.post(route('admin.logout'))
     }
+
+    const permissions = Array.isArray(admin?.permissions)
+        ? admin.permissions
+        : null
+
+    const visibleMenus = (admin_menus || []).filter((menu) => {
+        if (menu.key === 'dashboard') return true
+        if (!permissions) return true
+        return permissions.includes(menu.key)
+    })
 
     return (
         <div className="drawer lg:drawer-open">
@@ -83,132 +93,14 @@ export default function AdminLayout({ children }) {
                     </div>
 
                     <ul className="menu p-4 text-base-content w-full gap-1">
-                        <li>
-                            <Link href="/admin/dashboard" className="rounded-xl">
-                                <i className="fas fa-home"></i>
-                                Dashboard
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/penduduk" className="rounded-xl">
-                                <i className="fas fa-users"></i>
-                                Data Penduduk
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/surat" className="rounded-xl">
-                                <i className="fas fa-file-lines"></i>
-                                Layanan Surat
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/dusun" className="rounded-xl">
-                                <i className="fas fa-book"></i>
-                                Data Dusun
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/kepaladusun" className="rounded-xl">
-                                <i className="fas fa-user-tie"></i>
-                                Kepala Dusun
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/jabatan" className="rounded-xl">
-                                <i className="fas fa-list"></i>
-                                Jabatan
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/berita" className="rounded-xl">
-                                <i className="fas fa-newspaper"></i>
-                                Berita
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/gallery" className="rounded-xl">
-                                <i className="fas fa-image"></i>
-                                Galeri
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/profil-desa" className="rounded-xl">
-                                <i className="fas fa-city"></i>
-                                Profil Desa
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/peta-desa" className="rounded-xl">
-                                <i className="fas fa-map-location-dot"></i>
-                                Peta Desa
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/umkm" className="rounded-xl">
-                                <i className="fas fa-store"></i>
-                                UMKM
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/kontak-layanan" className="rounded-xl">
-                                <i className="fas fa-phone"></i>
-                                Kontak Layanan
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/pegawai" className="rounded-xl">
-                                <i className="fas fa-users"></i>
-                                Pegawai
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/kategori-bantuan" className="rounded-xl">
-                                <i className="fas fa-tags"></i>
-                                Kategori Bantuan
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/penerima-bantuan" className="rounded-xl">
-                                <i className="fas fa-hand-holding-heart"></i>
-                                Penerima Bantuan
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/stanting" className="rounded-xl">
-                                <i className="fas fa-child"></i>
-                                Stanting
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/apbdes" className="rounded-xl">
-                                <i className="fas fa-file-invoice-dollar"></i>
-                                APBDes
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="/admin/pengaduan" className="rounded-xl">
-                                <i className="fas fa-bullhorn"></i>
-                                Pengaduan
-                            </Link>
-                        </li>
-
+                        {visibleMenus.map((menu) => (
+                            <li key={menu.key}>
+                                <Link href={`/admin/${menu.key}`} className="rounded-xl">
+                                    <i className={`fas ${menu.icon}`}></i>
+                                    {menu.label}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </aside>
             </div>

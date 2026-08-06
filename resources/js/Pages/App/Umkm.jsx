@@ -1,41 +1,8 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function KontakLayanan({ kontak }) {
+export default function Umkm({ umkm = [] }) {
     const [menuOpen, setMenuOpen] = useState(false);
-
-    const iconColors = [
-        'from-red-500 to-red-600',
-        'from-orange-500 to-orange-600',
-        'from-emerald-500 to-emerald-600',
-        'from-blue-500 to-blue-600',
-        'from-yellow-500 to-yellow-600',
-        'from-cyan-500 to-cyan-600',
-        'from-sky-500 to-sky-600',
-        'from-violet-500 to-violet-600',
-    ];
-
-    const iconBg = [
-        'bg-red-50',
-        'bg-orange-50',
-        'bg-emerald-50',
-        'bg-blue-50',
-        'bg-yellow-50',
-        'bg-cyan-50',
-        'bg-sky-50',
-        'bg-violet-50',
-    ];
-
-    const ringColors = [
-        'ring-red-200',
-        'ring-orange-200',
-        'ring-emerald-200',
-        'ring-blue-200',
-        'ring-yellow-200',
-        'ring-cyan-200',
-        'ring-sky-200',
-        'ring-violet-200',
-    ];
 
     return (
         <div className="min-h-screen bg-[#f5f7fa]">
@@ -44,18 +11,18 @@ export default function KontakLayanan({ kontak }) {
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
                     <div className="flex items-center gap-3">
                         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm text-white shadow-sm">
-                            <i className="fas fa-phone"></i>
+                            <i className="fas fa-store"></i>
                         </div>
-                        <span className="text-lg font-bold text-gray-800">Kontak <span className="font-normal text-gray-500">Layanan</span></span>
+                        <span className="text-lg font-bold text-gray-800">UMKM <span className="font-normal text-gray-500">Tanjung Putus</span></span>
                     </div>
                     <div className="hidden items-center gap-1 md:flex">
                         <Link href="/desa" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-home mr-1.5"></i>Beranda</Link>
                         <Link href="/profildesa" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-info-circle mr-1.5"></i>Profil</Link>
                         <Link href="/infografis" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-chart-pie mr-1.5"></i>Infografis</Link>
                         <Link href="/apbdes" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-landmark mr-1.5"></i>APBDes</Link>
-                        <Link href="/umkm" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-store mr-1.5"></i>UMKM</Link>
+                        <Link href="/umkm" className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-emerald-600"><i className="fas fa-store mr-1.5"></i>UMKM</Link>
                         <Link href="/pengaduan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-bullhorn mr-1.5"></i>Pengaduan</Link>
-                        <Link href="/kontak-layanan" className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-emerald-600"><i className="fas fa-phone mr-1.5"></i>Kontak</Link>
+                        <Link href="/kontak-layanan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-phone mr-1.5"></i>Kontak</Link>
                         <Link href="/struktur" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-sitemap mr-1.5"></i>Struktur</Link>
                         <Link href="/surat/login" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-file-lines mr-1.5"></i>Surat</Link>
                     </div>
@@ -70,9 +37,9 @@ export default function KontakLayanan({ kontak }) {
                             <Link href="/profildesa" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-info-circle mr-2"></i>Profil</Link>
                             <Link href="/infografis" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-chart-pie mr-2"></i>Infografis</Link>
                             <Link href="/apbdes" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-landmark mr-2"></i>APBDes</Link>
-                            <Link href="/umkm" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-store mr-2"></i>UMKM</Link>
+                            <Link href="/umkm" className="rounded-lg bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-600"><i className="fas fa-store mr-2"></i>UMKM</Link>
                             <Link href="/pengaduan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-bullhorn mr-2"></i>Pengaduan</Link>
-                            <Link href="/kontak-layanan" className="rounded-lg bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-600"><i className="fas fa-phone mr-2"></i>Kontak</Link>
+                            <Link href="/kontak-layanan" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-phone mr-2"></i>Kontak</Link>
                             <Link href="/struktur" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-sitemap mr-2"></i>Struktur</Link>
                             <Link href="/surat/login" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"><i className="fas fa-file-lines mr-2"></i>Surat</Link>
                         </div>
@@ -80,7 +47,7 @@ export default function KontakLayanan({ kontak }) {
                 )}
             </nav>
 
-            {/* Jumbotron kompak */}
+            {/* Jumbotron */}
             <div className="relative mt-14 overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500">
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-white"></div>
@@ -90,20 +57,20 @@ export default function KontakLayanan({ kontak }) {
                     <div className="flex flex-col items-center text-center md:flex-row md:text-left md:justify-between">
                         <div>
                             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
-                                <i className="fas fa-phone"></i>
-                                Layanan Darurat & Informasi
+                                <i className="fas fa-store"></i>
+                                Usaha Mikro Kecil Menengah
                             </div>
                             <h1 className="text-3xl font-extrabold text-white md:text-5xl">
-                                Kontak Layanan
+                                UMKM Desa Tanjung Putus
                             </h1>
                             <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">
-                                Nomor penting yang dapat dihubungi dalam keadaan darurat atau untuk memperoleh layanan masyarakat.
+                                Daftar usaha mikro, kecil, dan menengah yang ada di Desa Tanjung Putus.
                             </p>
                         </div>
                         <div className="mt-6 flex shrink-0 items-center gap-4 rounded-2xl bg-white/15 p-5 backdrop-blur-sm md:mt-0">
                             <div className="text-center">
-                                <p className="text-3xl font-extrabold text-white">{kontak.length}</p>
-                                <p className="text-xs font-medium text-white/70">Total Layanan</p>
+                                <p className="text-3xl font-extrabold text-white">{umkm.length}</p>
+                                <p className="text-xs font-medium text-white/70">Total UMKM</p>
                             </div>
                         </div>
                     </div>
@@ -112,61 +79,48 @@ export default function KontakLayanan({ kontak }) {
 
             {/* Konten */}
             <div className="mx-auto max-w-6xl px-6 py-10">
-                {kontak.length === 0 ? (
+                {umkm.length === 0 ? (
                     <div className="rounded-3xl border border-dashed border-gray-300 bg-white p-16 shadow-sm text-center">
                         <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gray-100 text-4xl text-gray-400">
-                            <i className="fas fa-phone-slash"></i>
+                            <i className="fas fa-store-slash"></i>
                         </div>
-                        <p className="text-xl font-semibold text-gray-500">Belum ada kontak layanan</p>
+                        <p className="text-xl font-semibold text-gray-500">Belum ada UMKM terdaftar</p>
                     </div>
                 ) : (
-                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                        {kontak.map((item, i) => (
-                            <a
-                                key={item.id}
-                                href={`tel:${item.nomor}`}
-                                className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
-                            >
-                                <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500"></div>
-                                <div className={`mb-5 flex h-16 w-16 items-center justify-center rounded-2xl ${iconBg[i % iconBg.length]} ring-2 ${ringColors[i % ringColors.length]} transition group-hover:scale-110`}>
-                                    {item.icon_image ? (
-                                        <img src={item.icon_image} alt={item.nama_layanan} className="h-8 w-8 object-contain" />
-                                    ) : item.icon_class ? (
-                                        <i className={`${item.icon_class} text-2xl`}
-                                            style={{
-                                                color: ['#dc2626', '#ea580c', '#059669', '#2563eb', '#ca8a04', '#0891b2', '#0284c7', '#7c3aed'][i % 8]
-                                            }}
-                                        ></i>
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                        {umkm.map((b) => {
+                            const isPromo = /(promo|diskon|sale|potongan)/i.test(b.keterangan || '');
+
+                            return (
+                                <Link href={`/umkm/${b.id}`} key={b.id} className="relative overflow-hidden rounded-3xl border border-base-200 bg-white shadow-lg block group transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                                    {b.foto1 ? (
+                                        <img src={b.foto1} alt={b.nama_usaha} className="h-40 w-full object-cover" />
                                     ) : (
-                                        <i className="fas fa-phone text-2xl text-gray-400"></i>
+                                        <div className="h-40 w-full bg-gray-200 flex items-center justify-center">
+                                            <i className="fas fa-store text-4xl text-gray-300"></i>
+                                        </div>
                                     )}
-                                </div>
-                                <p className="text-lg font-bold text-gray-900 group-hover:text-emerald-600 transition">
-                                    {item.nama_layanan}
-                                </p>
-                                <p className="mt-2 flex items-center gap-2 text-2xl font-extrabold tracking-tight"
-                                    style={{
-                                        color: ['#dc2626', '#ea580c', '#059669', '#2563eb', '#ca8a04', '#0891b2', '#0284c7', '#7c3aed'][i % 8]
-                                    }}
-                                >
-                                    <i className="fas fa-phone-alt text-sm opacity-70"></i>
-                                    {item.nomor}
-                                </p>
-                                <div className="mt-4 flex items-center gap-1 text-xs font-medium text-gray-400 group-hover:text-emerald-500 transition">
-                                    <i className="fas fa-arrow-up-right-from-square"></i>
-                                    Ketuk untuk menelepon
-                                </div>
-                            </a>
-                        ))}
+                                    <div className="absolute top-3 left-3 z-20">
+                                        <span className={`inline-flex items-center rounded-full px-3 py-1 gap-1 text-xs font-bold text-white shadow ${isPromo ? 'bg-gradient-to-r from-red-500 to-rose-500' : 'bg-gradient-to-r from-emerald-600 to-emerald-400'}`}>
+                                            <i className="fas fa-shopping-bag"></i> <div> UMKM</div>
+                                        </span>
+                                    </div>
+                                    <div className="p-4">
+                                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition">{b.nama_usaha}</h3>
+                                        <p className="mt-1 text-xs text-gray-500">{b.keterangan ? (b.keterangan.length > 80 ? b.keterangan.slice(0, 80) + '...' : b.keterangan) : ''}</p>
+                                        <p className="mt-2 text-sm text-gray-600"><i className="fas fa-map-marker-alt mr-1"></i> {b.alamat}</p>
+                                        <button className="mt-3 rounded-full bg-[#5ee142] px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-600 w-full text-center">
+                                            <i className="fas fa-phone-alt mr-1"></i> {b.nohp}
+                                        </button>
+                                    </div>
+                                </Link>
+                            )
+                        })}
                     </div>
                 )}
 
                 {/* Navigasi */}
                 <div className="mt-12 flex flex-wrap justify-center gap-4">
-                    <Link href="/apbdes" className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-emerald-400 hover:text-emerald-600">
-                        <i className="fas fa-landmark"></i>
-                        Lihat APBDes
-                    </Link>
                     <Link href="/desa" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:from-emerald-600 hover:to-emerald-700">
                         <i className="fas fa-arrow-left"></i>
                         Kembali ke Beranda
@@ -177,7 +131,7 @@ export default function KontakLayanan({ kontak }) {
             {/* Footer */}
             <footer className="border-t border-gray-200 bg-white py-6">
                 <div className="mx-auto max-w-6xl px-6 text-center text-sm text-gray-400">
-                    &copy; {new Date().getFullYear()} Desa Tanjung Putus. Hubungi nomor darurat dengan bijak.
+                    &copy; {new Date().getFullYear()} Desa Tanjung Putus. Dukung UMKM lokal desa kita.
                 </div>
             </footer>
         </div>

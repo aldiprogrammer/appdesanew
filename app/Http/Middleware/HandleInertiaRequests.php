@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
             'admin_auth' => [
                 'admin' => Auth::guard('admin')->user(),
             ],
+            'admin_menus' => config('admin_menus'),
         ];
     }
 }

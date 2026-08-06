@@ -27,29 +27,31 @@ export default function AdminLogin({ status }) {
                     </div>
 
                     <div className="relative z-10">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm">
-                                <i className="fas fa-desktop text-xl"></i>
-                            </div>
-                            <div>
+                        <div className="flex items-center gap-4">
+
+                            {/* <div>
                                 <h1 className="text-xl font-bold text-white">APPDes</h1>
                                 <p className="text-xs text-white/60">Admin Panel</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
                     <div className="relative z-10">
-                        <blockquote className="text-2xl font-light leading-relaxed text-white mt-10">
-                            ADMIN DESA TANJUNG PUTUS
-                        </blockquote>
-                        <p className="mt-4 text-sm text-white/60">
-                            Sistem Informasi Desa — Kelola data desa dengan mudah dan profesional.
-                        </p>
+                        <center>
+                            <img src="/logo/langkat.png" alt="Pemerintah Kabupaten Langkat" className="h-30 w-auto" />
+
+                            <blockquote className="text-2xl font-light leading-relaxed text-white mt-2">
+                                ADMIN DESA TANJUNG PUTUS
+                            </blockquote>
+                            <p className="text-sm text-white /60">
+                                Sistem Informasi Desa — Kelola data desa dengan mudah dan profesional.
+                            </p>
+                        </center>
                     </div>
 
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-4 text-sm text-white/50">
-                            <span>&copy; {new Date().getFullYear()} APPDes</span>
+                    <div className="relative z-10  text-align-center">
+                        <div className="flex items-center gap-4 text-sm text-white/50 ">
+                            <span>&copy; {new Date().getFullYear()} APPDestanjungputus</span>
                             <span className="h-3 w-px bg-white/20"></span>
                             <Link href="/desa" className="transition hover:text-white">Kembali ke Beranda</Link>
                         </div>
@@ -70,7 +72,7 @@ export default function AdminLogin({ status }) {
 
                         <div className="mb-8">
                             <h2 className="text-3xl font-bold text-white">Selamat Datang</h2>
-                            <p className="mt-2 text-gray-400">Silakan masuk ke panel administrasi desa.</p>
+                            <p className="mt-2 text-gray-400">Silakan masuk ke panel administrasi desa tanjung putus.</p>
                         </div>
 
                         {status && (
@@ -166,7 +168,7 @@ export default function AdminLogin({ status }) {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

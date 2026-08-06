@@ -154,6 +154,39 @@ export default function Penduduk({ penduduk, dusunList, search, dusunFilter, aga
         return found ? found.label : id;
     };
 
+    const groups = useMemo(() => {
+        const sorted = [...penduduk.data].sort((a, b) => {
+            const ka = String(a.no_kk || '');
+            const kb = String(b.no_kk || '');
+            if (!ka && !kb) return 0;
+            if (!ka) return 1;
+            if (!kb) return -1;
+            return ka.localeCompare(kb, undefined, { numeric: true });
+        });
+
+        const result = [];
+        let current = null;
+
+        for (const item of sorted) {
+            const key = String(item.no_kk || '');
+
+            if (key) {
+                if (!current || current.no_kk !== key) {
+                    current = { no_kk: key, kepala: null, anggota: [] };
+                    result.push(current);
+                }
+                current.anggota.push(item);
+                if (item.kk_level === '1' && !current.kepala) {
+                    current.kepala = item.nama;
+                }
+            } else {
+                result.push({ no_kk: '', kepala: null, anggota: [item] });
+            }
+        }
+
+        return result;
+    }, [penduduk.data]);
+
     const renderFormFields = () => (
         <div className="grid gap-4 md:grid-cols-2">
             <label className="form-control w-full">
@@ -333,7 +366,6 @@ export default function Penduduk({ penduduk, dusunList, search, dusunFilter, aga
                                     <th>No</th>
                                     <th>NIK</th>
                                     <th>Nama</th>
-                                    <th>No. KK</th>
                                     <th>Dusun</th>
                                     <th>RT / RW</th>
                                     <th>JK</th>
@@ -345,28 +377,56 @@ export default function Penduduk({ penduduk, dusunList, search, dusunFilter, aga
                                 </tr>
                             </thead>
                             <tbody>
-                                {penduduk.data.length > 0 ? penduduk.data.map((item, i) => (
-                                    <tr key={item.id}>
-                                        <td>{penduduk.from + i}</td>
-                                        <td className="font-mono text-xs">{item.nik}</td>
-                                        <td className="font-medium">{item.nama}</td>
-                                        <td className="font-mono text-xs">{item.no_kk || '-'}</td>
-                                        <td>{item.dusun || '-'}</td>
-                                        <td>{item.rt || '-'} / {item.rw || '-'}</td>
-                                        <td>{sexLabel[item.sex] || '-'}</td>
-                                        <td>{getAgamaLabel(item.agama_id)}</td>
-                                        <td>{getKawinLabel(item.status_kawin)}</td>
-                                        <td className="max-w-[140px] truncate" title={getPekerjaanLabel(item.pekerjaan_id)}>{getPekerjaanLabel(item.pekerjaan_id)}</td>
-                                        <td>{item.kk_level === '1' ? <span className="badge badge-success badge-sm">Ya</span> : '-'}</td>
-                                        <td>
-                                            <div className="flex gap-1">
-                                                <button type="button" onClick={() => openEditModal(item)} className="btn btn-warning btn-xs">Edit</button>
-                                                <button type="button" onClick={() => handleDelete(item)} className="btn btn-error btn-xs text-white">Hapus</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )) : (
-                                    <tr><td colSpan="12" className="py-8 text-center text-gray-500">Tidak ada data penduduk.</td></tr>
+                                {penduduk.data.length > 0 ? (() => {
+                                    let counter = penduduk.from - 1;
+
+                                    return groups.map((group, gi) => (
+                                        <React.Fragment key={gi}>
+                                            {group.no_kk && (
+                                                <tr className="bg-primary/10 border-y border-base-300">
+                                                    <td colSpan="11" className="py-2">
+                                                        <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+                                                            <span className="font-semibold text-gray-900">
+                                                                <i className="fas fa-house-chimney mr-2 text-primary"></i>
+                                                                Nomor KK: <span className="font-mono">{group.no_kk}</span>
+                                                            </span>
+                                                            <span className="text-sm">
+                                                                Kepala Keluarga: <span className="font-medium">{group.kepala || '-'}</span>
+                                                            </span>
+                                                            <span className="badge badge-ghost badge-sm">{group.anggota.length} anggota</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+
+                                            {group.anggota.map((item) => {
+                                                counter++;
+
+                                                return (
+                                                    <tr key={item.id}>
+                                                        <td>{counter}</td>
+                                                        <td className="font-mono text-xs">{item.nik}</td>
+                                                        <td className="font-medium">{item.nama}</td>
+                                                        <td>{item.dusun || '-'}</td>
+                                                        <td>{item.rt || '-'} / {item.rw || '-'}</td>
+                                                        <td>{sexLabel[item.sex] || '-'}</td>
+                                                        <td>{getAgamaLabel(item.agama_id)}</td>
+                                                        <td>{getKawinLabel(item.status_kawin)}</td>
+                                                        <td className="max-w-[140px] truncate" title={getPekerjaanLabel(item.pekerjaan_id)}>{getPekerjaanLabel(item.pekerjaan_id)}</td>
+                                                        <td>{item.kk_level === '1' ? <span className="badge badge-success badge-sm">Ya</span> : '-'}</td>
+                                                        <td>
+                                                            <div className="flex gap-1">
+                                                                <button type="button" onClick={() => openEditModal(item)} className="btn btn-warning btn-xs">Edit</button>
+                                                                <button type="button" onClick={() => handleDelete(item)} className="btn btn-error btn-xs text-white">Hapus</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </React.Fragment>
+                                    ));
+                                })() : (
+                                    <tr><td colSpan="11" className="py-8 text-center text-gray-500">Tidak ada data penduduk.</td></tr>
                                 )}
                             </tbody>
                         </table>

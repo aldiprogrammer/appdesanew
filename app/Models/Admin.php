@@ -14,6 +14,7 @@ class Admin extends Authenticatable
         'password',
         'nama',
         'email',
+        'permissions',
     ];
 
     protected $hidden = [
@@ -25,6 +26,16 @@ class Admin extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'permissions' => 'array',
         ];
+    }
+
+    public function hasPermission(string $menu): bool
+    {
+        if ($this->permissions === null) {
+            return true;
+        }
+
+        return in_array($menu, $this->permissions, true);
     }
 }
