@@ -2,7 +2,7 @@
 set -e
 
 APP_DIR="/home/u107214145/domains/robintang.my.id/appdesanew"
-WEB_DIR="/home/u107214145/domains/robintang.my.id.com/public_html/tanjungputus"
+WEB_DIR="/home/u107214145/domains/robintang.my.id/public_html/tanjungputus"
 BRANCH="main"
 
 cd "$APP_DIR"
