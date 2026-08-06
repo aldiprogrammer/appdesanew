@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-APP_DIR="/home/u107214145/domains/robintang.my.id/sentosanew"
+APP_DIR="/home/u107214145/domains/robintang.my.id/appdesanew"
 WEB_DIR="/home/u107214145/domains/robintang.my.id.com/public_html/tanjungputus"
 BRANCH="main"
 
