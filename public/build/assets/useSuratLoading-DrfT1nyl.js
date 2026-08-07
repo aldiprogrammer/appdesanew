@@ -1,0 +1,1 @@
+import{c as e,i as t,u as n}from"./app-CJXJDvSR.js";var r=n(e(),1),i=!1,a=new Set;function o(e){i=e,a.forEach(t=>t(e))}function s(){let[e,n]=(0,r.useState)(i);return(0,r.useEffect)(()=>(a.add(n),()=>a.delete(n)),[]),(0,r.useEffect)(()=>{let e=()=>o(!0),n=()=>o(!1),r=t.on(`start`,e),i=t.on(`finish`,n);return()=>{r(),i()}},[]),e}export{s as t};
